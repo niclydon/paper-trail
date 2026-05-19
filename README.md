@@ -47,6 +47,23 @@ See [`examples/`](./examples) for a real before-and-after pair:
 
 The CHANGES.md entry is the chronological index. The narrative doc is the episode.
 
+## What this costs
+
+The honest answer: the agent generates more tokens, sessions take a bit longer, and `CHANGES.md` files grow over time.
+
+Real measurements from one user's 30-day window on a multi-project Claude Pro Max setup:
+
+- **9%** of weekly plan usage came from a dedicated `/narrative-docs-update` slash command (visible via `/status` in Claude Code).
+- **12.6%** of all Claude Code written output over 30 days referenced `CHANGES.md`, `docs/narrative/`, or `docs/migrations/` paths. Measured by character count across 158,000 messages from 1,737 sessions.
+
+Call it **10-13% of Claude Code work going to documentation**, with 9% as a cleanly measurable floor.
+
+One thing the data made clear: the discipline isn't applied uniformly. About 88% of sessions never touch documentation at all (quick fixes, exploration, one-offs). The doc work concentrates in the ~12% of sessions that do substantive work and produce something worth a `CHANGES.md` entry. Documentation effort scales with work effort.
+
+What you get back: a searchable record of every non-trivial decision, the rejection rationale for alternatives, and verification numbers, all in plain markdown your tools and future agents can grep.
+
+Tight on context or budget? The `-LITE` variants exist for exactly this case. Same discipline, smaller footprint.
+
 ## The audit posture
 
 > Treat every session as if a future documentary crew will want to interview the agent-plus-user pair about what happened this hour. "We did X" is the story. "We considered A, B, C; rejected A because of Y and B because of Z; chose C; here are the numbers that validated C" is the documentary. Write the documentary version.
